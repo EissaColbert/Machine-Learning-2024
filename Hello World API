@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  version: '0.0'
+  title: Hello World
+  description: Introducing open api 3.0.0
+
+paths:
+  /hello:
+    get:
+      tags:
+        - hello
+      operationId: src.hello.hello_world
+      description: Returns hello world string
+      responses:
+        '200':
+          description: 'Success'
+  /sum/<arg1>/<arg2>:
+    get:
+      tags:
+        - SUM
+      operationId: src.sum.sum
+      description: Returns the sum of two numbers
+      responses:
+        '200':
+          description: 'Success'
+  /readfile/<filename>:
+    get:
+      tags:
+        - Read text
+      summary: Read a file
+      operationId : src.readfile.txtfile
+      parameters:
+        - name: filename
+          in: query
+          description: reading text  from file
+          required: true
+          schema:
+            type: string
+      responses:
+        '405':
+          description: Invalid input
+    post:
+      tags:
+        - Upload
+      summary: Upload a file
+      operationId: src.readfile.uploadf
+      parameters:
+        - name: filename
+          in: query
+          description: filename to be uploaded
+          required: true
+          schema:
+            type: string
+      responses:
+        '405':
+          description: Invalid input
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+servers:
+  - url: 'http://localhost:8000/e222'
